@@ -2,17 +2,16 @@ package com.freecode.redditclone.service;
 
 
 
-import com.freecode.redditclone.dto.PostRequest;
-import com.freecode.redditclone.dto.PostResponse;
+import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.exceptions.SpringRedditException;
 import com.freecode.redditclone.exceptions.SubredditNotFoundException;
 import com.freecode.redditclone.exceptions.PostNotFoundException;
-import com.freecode.redditclone.mapper.PostMapper;
-import com.freecode.redditclone.model.Subreddit;
-import com.freecode.redditclone.model.Post;
+import com.freecode.redditclone.mapper.CitaMapper;
+import com.freecode.redditclone.model.Cita;
+import com.freecode.redditclone.model.Receta;
 import com.freecode.redditclone.model.User;
-import com.freecode.redditclone.repository.PostRepository;
-import com.freecode.redditclone.repository.SubredditRepository;
+import com.freecode.redditclone.repository.CitaRepository;
+import com.freecode.redditclone.repository.RecetaRepository;
 import com.freecode.redditclone.repository.UserRepository;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,16 +29,16 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 @Transactional
-public class PostService {
+public class CitaService {
     
-    private final SubredditRepository subredditRepository;
-    private final PostRepository postRepository;
+    private final RecetaRepository recetaRepository;
+    private final CitaRepository citaRepository;
     private final AuthService authService;
     private final UserRepository userRepository;
-    private final PostMapper postMapper;
+    private final CitaMapper citaMapper;
 
     @Transactional
-    public void create(PostRequest postRequest){
+    public void create(CitaDto citaDto){
         Subreddit subreddit=subredditRepository.findByName(postRequest.getSubredditName())
                     .orElseThrow(()-> new SpringRedditException("Subreddit not found to post"));
 

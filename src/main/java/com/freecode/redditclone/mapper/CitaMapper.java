@@ -2,16 +2,10 @@ package com.freecode.redditclone.mapper;
 
 import java.util.Optional;
 
-
-import com.freecode.redditclone.dto.PostRequest;
-import com.freecode.redditclone.dto.PostResponse;
-import com.freecode.redditclone.model.Post;
-import com.freecode.redditclone.model.Subreddit;
-import com.freecode.redditclone.model.Vote;
-import com.freecode.redditclone.model.VoteType;
+import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.model.Cita;
+import com.freecode.redditclone.model.Receta;
 import com.freecode.redditclone.model.User;
-import com.freecode.redditclone.repository.CommentRepository;
-import com.freecode.redditclone.repository.VoteRepository;
 import com.freecode.redditclone.service.AuthService;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 
@@ -20,11 +14,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.freecode.redditclone.model.VoteType.DOWNVOTE;
-import static com.freecode.redditclone.model.VoteType.UPVOTE;
 
 @Mapper(componentModel="spring")
-public interface PostMapper {
+public interface CitaMapper {
 
     /*@Autowired
     private CommentRepository commentRepository;
@@ -40,7 +32,7 @@ public interface PostMapper {
     @Mapping(target = "subreddit", source = "subreddit")
     @Mapping(target = "voteCount", constant = "0")
     @Mapping(target = "user", source = "user")
-    public Post map(PostRequest postRequest, Subreddit subreddit, User user);
+    public Cita map(CitaDto citaDto, Receta receta, User user);
 
     @Mapping(target = "id",source = "postId")
     @Mapping(target = "subredditName" , source="subreddit.name")
@@ -49,7 +41,7 @@ public interface PostMapper {
     //@Mapping(target = "duration", source = "java(getDuration(post))")
     //@Mapping(target = "upVote",expression = "java(isPostUpVoted(post))")
     //@Mapping(target = "downVote",expression = "java(isPostDownvoted(post))")
-    public  PostResponse mapToDto(Post post);
+    public  CitaDto mapToDto(Cita cita);
 
     /*Integer commentCount(Post post){
         return commentRepository.findByPost(post).size();
@@ -79,3 +71,4 @@ public interface PostMapper {
         return false;
     }*/
 }
+

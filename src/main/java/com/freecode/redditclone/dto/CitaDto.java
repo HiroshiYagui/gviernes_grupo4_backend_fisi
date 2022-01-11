@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostRequest {
+public class CitaDto {
     private long PostId;
     private String subredditName;
     private String postName;
     private String url;
     private String Description;
 }
+

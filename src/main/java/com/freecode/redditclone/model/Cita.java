@@ -1,5 +1,4 @@
 package com.freecode.redditclone.model;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -27,7 +26,7 @@ import static javax.persistence.GenerationType.IDENTITY;;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class Cita {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long postId;
@@ -45,5 +44,7 @@ public class Post {
     private Instant createdDate;
     @ManyToOne(fetch=LAZY)
     @JoinColumn(name="id",referencedColumnName="id")
-    private Subreddit subreddit;
+    private Receta receta;
 }
+
+
