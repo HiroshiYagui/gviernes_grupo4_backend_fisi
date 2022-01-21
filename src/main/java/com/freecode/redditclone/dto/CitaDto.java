@@ -1,5 +1,7 @@
 package com.freecode.redditclone.dto;
 
+import java.sql.Date;
+import java.sql.Time;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,10 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CitaDto {
-    private long PostId;
-    private String subredditName;
-    private String postName;
-    private String url;
-    private String Description;
+    private String especialidad;
+    private Time hora;
+    private Date fecha;
 }
 

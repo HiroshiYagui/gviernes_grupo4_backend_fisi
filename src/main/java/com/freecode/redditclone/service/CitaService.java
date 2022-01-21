@@ -3,16 +3,15 @@ package com.freecode.redditclone.service;
 
 
 import com.freecode.redditclone.dto.CitaDto;
-import com.freecode.redditclone.exceptions.SpringRedditException;
-import com.freecode.redditclone.exceptions.SubredditNotFoundException;
-import com.freecode.redditclone.exceptions.PostNotFoundException;
+import com.freecode.redditclone.exceptions.SpringException;
+import com.freecode.redditclone.exceptions.RecetaNotFoundException;
+import com.freecode.redditclone.exceptions.CitaNotFoundException;
 import com.freecode.redditclone.mapper.CitaMapper;
 import com.freecode.redditclone.model.Cita;
 import com.freecode.redditclone.model.Receta;
 import com.freecode.redditclone.model.User;
 import com.freecode.redditclone.repository.CitaRepository;
-import com.freecode.redditclone.repository.RecetaRepository;
-import com.freecode.redditclone.repository.UserRepository;
+
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -30,53 +29,48 @@ import java.util.List;
 @Slf4j
 @Transactional
 public class CitaService {
-    
-    private final RecetaRepository recetaRepository;
+  
     private final CitaRepository citaRepository;
-    private final AuthService authService;
-    private final UserRepository userRepository;
     private final CitaMapper citaMapper;
 
     @Transactional
     public void create(CitaDto citaDto){
-        Subreddit subreddit=subredditRepository.findByName(postRequest.getSubredditName())
-                    .orElseThrow(()-> new SpringRedditException("Subreddit not found to post"));
-
-        postRepository.save(postMapper.map(postRequest, subreddit ,authService.getCurrentUser()));
+        
+        citaRepository.save(citaMapper.map(citaDto));
     }
 
     @Transactional(readOnly=true)
-    public PostResponse getPost(Long id){
-        Post post= postRepository.findById(id)
-                    .orElseThrow(() -> new PostNotFoundException(id.toString()));
-        return postMapper.mapToDto(post);            
+    public CitaDto getCita(Long id){
+        Cita cita= citaRepository.findById(id)
+                    .orElseThrow(() -> new CitaNotFoundException(id.toString()));
+        return citaMapper.mapToDto(cita);            
     }
 
     @Transactional(readOnly=true)
-    public List<PostResponse> getAllPosts(){
-        return postRepository.findAll()
+    public List<CitaDto> getAllCitas(){
+        return citaRepository.findAll()
                 .stream()
-                .map(postMapper::mapToDto)
+                .map(citaMapper::mapToDto)
                 .collect(toList());
         
     }
-
+/*
     @Transactional(readOnly=true)
-    public List<PostResponse> getPostBySubreddit(Long subredditId ){
-        Subreddit subreddit=subredditRepository.findById(subredditId)
-                            .orElseThrow(()-> new SubredditNotFoundException(subredditId.toString()));
-        List<Post> posts=postRepository.findAllBySubreddit(subreddit);
-        return posts.stream().map(postMapper::mapToDto).collect(toList());
+    public List<CitaDto> getCitaByReceta(Long recetaId ){
+        Receta receta=recetaRepository.findById(recetaId)
+                            .orElseThrow(()-> new RecetaNotFoundException(recetaId.toString()));
+        List<Cita> citas=citaRepository.findAllByReceta(receta);
+        return citas.stream().map(citaMapper::mapToDto).collect(toList());
     }
 
     @Transactional(readOnly=true)
-    public List<PostResponse> getPostByUsernarme(String username){
+    public List<CitaDto> getCitaByUsernarme(String username){
         User user=userRepository.findByUsername(username)
                                 .orElseThrow(() -> new UsernameNotFoundException(username));
-        return postRepository.findByUser(user)
+        return citaRepository.findByUser(user)
                                 .stream()
-                                .map(postMapper::mapToDto)
+                                .map(citaMapper::mapToDto)
                                 .collect(toList());
     }
-
+*/
 }

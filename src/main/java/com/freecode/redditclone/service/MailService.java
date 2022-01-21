@@ -1,6 +1,6 @@
 package com.freecode.redditclone.service;
 
-import com.freecode.redditclone.exceptions.SpringRedditException;
+import com.freecode.redditclone.exceptions.SpringException;
 import com.freecode.redditclone.model.NotificationEmail;
 
 
@@ -34,7 +34,7 @@ public class MailService {
             mailSender.send(messagePreparator);
             log.info("Activation email sent");
         }catch(MailException e){
-            throw new SpringRedditException("Exception ocurred when sending email");
+            throw new SpringException("Exception ocurred when sending email");
         }
     }
 }

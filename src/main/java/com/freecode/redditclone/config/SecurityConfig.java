@@ -31,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf().disable()
         .authorizeRequests()
-        .antMatchers("/api/auth/**")
-        .permitAll()
+        .antMatchers("/api/auth/**").permitAll()
+        .antMatchers("/api/citas/**").permitAll()
         .anyRequest()
         .authenticated();
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, 

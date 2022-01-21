@@ -1,7 +1,7 @@
 package com.freecode.redditclone.exceptions;
 
-public class PostNotFoundException extends RuntimeException {
-    public PostNotFoundException(String Message){
+public class CitaNotFoundException extends RuntimeException {
+    public CitaNotFoundException(String Message){
         super(Message);
     }
 }

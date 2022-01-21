@@ -27,20 +27,11 @@ public interface CitaMapper {
 
     
 
-    @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
-    @Mapping(target = "description" , source = "postRequest.description")
-    @Mapping(target = "subreddit", source = "subreddit")
-    @Mapping(target = "voteCount", constant = "0")
-    @Mapping(target = "user", source = "user")
-    public Cita map(CitaDto citaDto, Receta receta, User user);
 
-    @Mapping(target = "id",source = "postId")
-    @Mapping(target = "subredditName" , source="subreddit.name")
-    @Mapping(target = "userName",source = "user.username")
-    //@Mapping(target = "commentCount",source = "java(commentCount(post))")
-    //@Mapping(target = "duration", source = "java(getDuration(post))")
-    //@Mapping(target = "upVote",expression = "java(isPostUpVoted(post))")
-    //@Mapping(target = "downVote",expression = "java(isPostDownvoted(post))")
+    @Mapping(target = "disponible", constant = "true")
+    public Cita map(CitaDto citaDto);
+
+   
     public  CitaDto mapToDto(Cita cita);
 
     /*Integer commentCount(Post post){

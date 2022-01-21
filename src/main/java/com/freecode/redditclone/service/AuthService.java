@@ -7,7 +7,7 @@ import java.util.UUID;
 import com.freecode.redditclone.dto.AuthenticationResponse;
 import com.freecode.redditclone.dto.LoginRequest;
 import com.freecode.redditclone.dto.RegisterRequest;
-import com.freecode.redditclone.exceptions.SpringRedditException;
+import com.freecode.redditclone.exceptions.SpringException;
 import com.freecode.redditclone.model.NotificationEmail;
 import com.freecode.redditclone.model.User;
 import com.freecode.redditclone.model.VerificationToken;
@@ -52,7 +52,7 @@ public class AuthService {
         userRepository.save(user);
         String token=generateVerificationToken(user);
         mailService.sendMail(new NotificationEmail("Please Activate your Account",
-        user.getEmail(),"Thank you for signing up to Spring Reddit,"+
+        user.getEmail(),"Thank you for signing up to Clinica Universitaria,"+
         "please click on the below url to activate your account: "+
         "http://localhost::8080/api/auth/accountVerification/"+token));
         
@@ -79,13 +79,13 @@ public class AuthService {
 
     public void verifyAccount(String token){
         Optional<VerificationToken> verificationToken=verificationTokenRepository.findByToken(token);
-        verificationToken.orElseThrow(()-> new SpringRedditException("Invalid Token"));
+        verificationToken.orElseThrow(()-> new SpringException("Invalid Token"));
         fetchUserAndEnable(verificationToken.get());
     }
 
     public void fetchUserAndEnable(VerificationToken verificationToken){
         String username=verificationToken.getUser().getUsername();
-        User user=userRepository.findByUsername(username).orElseThrow(()-> new SpringRedditException("User not found"));
+        User user=userRepository.findByUsername(username).orElseThrow(()-> new SpringException("User not found"));
         user.setEnabled(true);
         userRepository.save(user);
     }

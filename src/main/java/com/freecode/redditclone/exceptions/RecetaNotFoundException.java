@@ -1,7 +1,7 @@
 package com.freecode.redditclone.exceptions;
 
-public class SubredditNotFoundException extends RuntimeException {
-    public SubredditNotFoundException(String Message){
+public class RecetaNotFoundException extends RuntimeException {
+    public RecetaNotFoundException(String Message){
         super(Message);
     }
 }
