@@ -5,8 +5,6 @@ import java.util.Optional;
 import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.model.Cita;
 import com.freecode.redditclone.model.Receta;
-import com.freecode.redditclone.model.User;
-import com.freecode.redditclone.service.AuthService;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 
 import org.mapstruct.Mapper;

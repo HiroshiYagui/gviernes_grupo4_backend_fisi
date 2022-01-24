@@ -9,7 +9,6 @@ import com.freecode.redditclone.exceptions.CitaNotFoundException;
 import com.freecode.redditclone.mapper.CitaMapper;
 import com.freecode.redditclone.model.Cita;
 import com.freecode.redditclone.model.Receta;
-import com.freecode.redditclone.model.User;
 import com.freecode.redditclone.repository.CitaRepository;
 
 
