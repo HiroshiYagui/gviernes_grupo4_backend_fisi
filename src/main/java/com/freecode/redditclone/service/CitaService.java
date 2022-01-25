@@ -11,26 +11,23 @@ import com.freecode.redditclone.model.Cita;
 import com.freecode.redditclone.model.Receta;
 import com.freecode.redditclone.repository.CitaRepository;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
-@Slf4j
 @Transactional
 public class CitaService {
-  
-    private final CitaRepository citaRepository;
-    private final CitaMapper citaMapper;
+    @Autowired
+    private  CitaRepository citaRepository;
+    @Autowired
+    private CitaMapper citaMapper;
 
     @Transactional
     public void create(CitaDto citaDto){
