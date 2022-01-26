@@ -1,8 +1,10 @@
 package com.freecode.redditclone.controller;
 import java.util.List;
 
+import com.freecode.redditclone.dto.Cita_UsuarioDto;
 import com.freecode.redditclone.dto.CitaDto;
-import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.dto.EspecialidadAndFechaDto;
+import com.freecode.redditclone.service.Cita_UsuarioService;
 import com.freecode.redditclone.service.CitaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +24,29 @@ import static org.springframework.http.ResponseEntity.status;
 
 @RequestMapping("api/citas")
 @RestController
-public class CitaController {
+public class Cita_usuarioController {
+    @Autowired
+    private  Cita_UsuarioService cita_UsuarioService;
     @Autowired
     private  CitaService citaService;
 
 
-    @PostMapping
-    public ResponseEntity<Void> CreateCita(@RequestBody CitaDto citaDto){
-        citaService.create(citaDto);
+    @PostMapping("/save")
+    public ResponseEntity<Void> Save(@RequestBody Cita_UsuarioDto cita_UsuarioDto){
+        cita_UsuarioService.save(cita_UsuarioDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @GetMapping("/filterEspecialidad/{especialidad}")
+    public ResponseEntity<List<CitaDto>> getCitabyEspecialidad(@PathVariable String especialidad){
+        return status(HttpStatus.OK).body(citaService.getByEspecialidad(especialidad));
+    }
+
+    @GetMapping("/filterFecha")
+    public ResponseEntity<List<CitaDto>> getCitabyEspecialidadAndFecha(@RequestBody EspecialidadAndFechaDto especialidadAndFechaDto){
+        return status(HttpStatus.OK).body(citaService.getByEspecialidadAndFecha(especialidadAndFechaDto));
+    }
+/*
     @GetMapping
     public ResponseEntity<List<CitaDto>> getAllCitas(){
         return status(HttpStatus.OK).body(citaService.getAllCitas());
@@ -54,16 +68,6 @@ public class CitaController {
         citaService.modify(citaDto,id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-/*
-    @GetMapping("by-subreddit/{id}")
-    public ResponseEntity<List<CitaDto>> getCitaByReceta(Long id){
-        return status(HttpStatus.OK).body(postService.getCitaByReceta(id));
-    }
 
-    @GetMapping("by-user/{id}")
-    public ResponseEntity<List<CitaDto>> getCitaByUsername(@PathVariable String username){
-        return status(HttpStatus.OK).body(postService.getCitaByUsernarme(username));
-    }
     */
 }
-

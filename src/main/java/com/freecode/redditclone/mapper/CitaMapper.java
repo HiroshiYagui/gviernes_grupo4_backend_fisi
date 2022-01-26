@@ -9,6 +9,7 @@ import com.github.marlonlom.utilities.timeago.TimeAgo;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,12 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Mapper(componentModel="spring")
 public interface CitaMapper {
 
-    /*@Autowired
-    private CommentRepository commentRepository;
-    @Autowired
-    private VoteRepository voteRepository;
-    @Autowired
-    private AuthService authService;*/
 
     
 
@@ -29,8 +24,9 @@ public interface CitaMapper {
     @Mapping(target = "disponible", constant = "true")
     public Cita map(CitaDto citaDto);
 
-   
     public  CitaDto mapToDto(Cita cita);
+
+    public void UpdateFromDto(CitaDto citaDto, @MappingTarget Cita cita);
 
     /*Integer commentCount(Post post){
         return commentRepository.findByPost(post).size();

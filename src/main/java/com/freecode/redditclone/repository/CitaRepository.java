@@ -1,8 +1,11 @@
 package com.freecode.redditclone.repository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.List;
+
+import java.sql.Time;
+import java.sql.Date;
 
 import com.freecode.redditclone.model.Cita;
 
@@ -12,6 +15,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface CitaRepository extends JpaRepository<Cita,Long> {
     Optional<Cita> findById(Long id);
 
-    List<Cita> findByEspecialidad(String especialidad);
+    Optional<Cita> findByHoraAndFechaAndEspecialidad(Time Hora,Date Fecha,String Especialidad);
+
+    List<Cita> findAllByEspecialidad(String Especialidad);
+
+    List<Cita> findAllByEspecialidadAndFecha(String Especialidad,Date Fecha);
 }
 

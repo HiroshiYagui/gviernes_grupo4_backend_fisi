@@ -3,6 +3,7 @@ package com.freecode.redditclone.service;
 
 
 import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.dto.EspecialidadAndFechaDto;
 import com.freecode.redditclone.exceptions.SpringException;
 import com.freecode.redditclone.exceptions.RecetaNotFoundException;
 import com.freecode.redditclone.exceptions.CitaNotFoundException;
@@ -50,6 +51,31 @@ public class CitaService {
                 .collect(toList());
         
     }
+
+    @Transactional
+    public void delete(Long id){
+        citaRepository.delete(citaRepository.getById(id));
+    }
+
+    @Transactional
+    public void modify(CitaDto citaDto, Long id){
+        Cita cita=citaRepository.getById(id);
+        citaMapper.UpdateFromDto(citaDto, cita);
+        citaRepository.save(cita);
+    }
+
+    @Transactional(readOnly=true)
+    public List<CitaDto> getByEspecialidad(String especialidad){
+        List<Cita> citas=citaRepository.findAllByEspecialidad(especialidad);
+        return citas.stream().map(citaMapper::mapToDto).collect(toList());
+    }
+
+    @Transactional(readOnly=true)
+    public List<CitaDto> getByEspecialidadAndFecha(EspecialidadAndFechaDto especialidadAndFechaDto){
+        List<Cita> citas=citaRepository.findAllByEspecialidadAndFecha(especialidadAndFechaDto.getEspecialidad(), especialidadAndFechaDto.getFecha());
+        return citas.stream().map(citaMapper::mapToDto).collect(toList());
+    }
+
 /*
     @Transactional(readOnly=true)
     public List<CitaDto> getCitaByReceta(Long recetaId ){
