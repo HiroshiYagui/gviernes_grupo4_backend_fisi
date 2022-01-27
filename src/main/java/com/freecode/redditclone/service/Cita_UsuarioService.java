@@ -1,6 +1,8 @@
 package com.freecode.redditclone.service;
 
+import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.dto.Cita_UsuarioDto;
+import com.freecode.redditclone.dto.HistorialDto;
 import com.freecode.redditclone.exceptions.SpringException;
 import com.freecode.redditclone.exceptions.RecetaNotFoundException;
 import com.freecode.redditclone.exceptions.CitaNotFoundException;
@@ -13,6 +15,7 @@ import com.freecode.redditclone.repository.Cita_UsuarioRepository;
 import com.freecode.redditclone.repository.HistorialRepository;
 import com.freecode.redditclone.repository.CitaRepository;
 import com.freecode.redditclone.model.Ids.Cita_UsuarioId;
+import com.freecode.redditclone.mapper.CitaMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,6 +39,9 @@ public class Cita_UsuarioService {
     @Autowired
     private HistorialRepository historialRepository;
 
+    @Autowired
+    private CitaMapper citaMapper;
+
     @Transactional
     public void save(Cita_UsuarioDto cita_UsuarioDto){
         
@@ -52,6 +58,12 @@ public class Cita_UsuarioService {
         citaRepository.save(cita);
     }
 
+    @Transactional(readOnly=true)
+    public List<CitaDispDto> getByUsuario(HistorialDto historialDto){
+        List<Long> citas_ids=cita_UsuarioRepository.findAllByHistorial_id(historialDto.getHistorial_id());
+        List<Cita> citas=citaRepository.findByIds(citas_ids);
+        return citas.stream().map(citaMapper::mapToDispDto).collect(toList());
+    }
     
 /*
     @Transactional(readOnly=true)

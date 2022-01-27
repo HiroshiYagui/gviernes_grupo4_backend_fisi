@@ -3,6 +3,7 @@ package com.freecode.redditclone.mapper;
 import java.util.Optional;
 
 import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.model.Cita;
 import com.freecode.redditclone.model.Receta;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
@@ -25,6 +26,8 @@ public interface CitaMapper {
     public Cita map(CitaDto citaDto);
 
     public  CitaDto mapToDto(Cita cita);
+
+    public  CitaDispDto mapToDispDto(Cita cita);
 
     public void UpdateFromDto(CitaDto citaDto, @MappingTarget Cita cita);
 

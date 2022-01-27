@@ -3,7 +3,9 @@ import java.util.List;
 
 import com.freecode.redditclone.dto.Cita_UsuarioDto;
 import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.dto.EspecialidadAndFechaDto;
+import com.freecode.redditclone.dto.HistorialDto;
 import com.freecode.redditclone.service.Cita_UsuarioService;
 import com.freecode.redditclone.service.CitaService;
 
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,13 +39,23 @@ public class Cita_usuarioController {
     }
 
     @GetMapping("/filterEspecialidad/{especialidad}")
-    public ResponseEntity<List<CitaDto>> getCitabyEspecialidad(@PathVariable String especialidad){
+    public ResponseEntity<List<CitaDispDto>> getCitabyEspecialidad(@PathVariable String especialidad){
         return status(HttpStatus.OK).body(citaService.getByEspecialidad(especialidad));
     }
 
     @GetMapping("/filterFecha")
-    public ResponseEntity<List<CitaDto>> getCitabyEspecialidadAndFecha(@RequestBody EspecialidadAndFechaDto especialidadAndFechaDto){
+    public ResponseEntity<List<CitaDispDto>> getCitabyEspecialidadAndFecha(@RequestBody EspecialidadAndFechaDto especialidadAndFechaDto){
         return status(HttpStatus.OK).body(citaService.getByEspecialidadAndFecha(especialidadAndFechaDto));
+    }
+
+    @GetMapping("/listUser")
+    public ResponseEntity<List<CitaDispDto>> getListCitaByUsuario(@RequestBody HistorialDto historialDto){
+        return status(HttpStatus.OK).body(cita_UsuarioService.getByUsuario(historialDto));
+    }
+
+    @GetMapping("/list/{id}")
+    public ResponseEntity <CitaDispDto> getCitaByUsuario(@RequestBody HistorialDto historialDto, @PathVariable int id){
+        return status(HttpStatus.OK).body(cita_UsuarioService.getByUsuario(historialDto).get(id));
     }
 /*
     @GetMapping

@@ -3,6 +3,7 @@ package com.freecode.redditclone.service;
 
 
 import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.dto.EspecialidadAndFechaDto;
 import com.freecode.redditclone.exceptions.SpringException;
 import com.freecode.redditclone.exceptions.RecetaNotFoundException;
@@ -65,15 +66,15 @@ public class CitaService {
     }
 
     @Transactional(readOnly=true)
-    public List<CitaDto> getByEspecialidad(String especialidad){
+    public List<CitaDispDto> getByEspecialidad(String especialidad){
         List<Cita> citas=citaRepository.findAllByEspecialidad(especialidad);
-        return citas.stream().map(citaMapper::mapToDto).collect(toList());
+        return citas.stream().map(citaMapper::mapToDispDto).collect(toList());
     }
 
     @Transactional(readOnly=true)
-    public List<CitaDto> getByEspecialidadAndFecha(EspecialidadAndFechaDto especialidadAndFechaDto){
+    public List<CitaDispDto> getByEspecialidadAndFecha(EspecialidadAndFechaDto especialidadAndFechaDto){
         List<Cita> citas=citaRepository.findAllByEspecialidadAndFecha(especialidadAndFechaDto.getEspecialidad(), especialidadAndFechaDto.getFecha());
-        return citas.stream().map(citaMapper::mapToDto).collect(toList());
+        return citas.stream().map(citaMapper::mapToDispDto).collect(toList());
     }
 
 /*

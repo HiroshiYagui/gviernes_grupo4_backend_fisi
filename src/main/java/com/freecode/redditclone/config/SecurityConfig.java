@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers("/api/auth/**").permitAll()
         .antMatchers("/api/citas/**").permitAll()
+        .antMatchers("/api/pagos/**").permitAll()
         .anyRequest()
         .authenticated();
         

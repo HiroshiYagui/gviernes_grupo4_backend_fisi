@@ -6,10 +6,9 @@ import java.sql.Time;
 import lombok.Data;
 
 @Data
-public class CitaDto {
-
+public class CitaDispDto {
     private String especialidad;
     private Time hora;
     private Date fecha;
+    private boolean disponible;
 }
-
