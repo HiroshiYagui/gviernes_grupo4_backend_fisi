@@ -2,6 +2,7 @@ package com.freecode.redditclone.repository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Collection;
 import java.util.List;
 
 import java.sql.Time;
@@ -23,7 +24,6 @@ public interface CitaRepository extends JpaRepository<Cita,Long> {
 
     List<Cita> findAllByEspecialidadAndFecha(String Especialidad,Date Fecha);
 
-    @Query("select * from cita where id_cita in :cita_ids")
-    List<Cita> findByIds(@Param("cita_ids")List<Long>cita_ids);
+    List<Cita> findAllByCitaIdIn(List<Long> cita_ids);
 }
 

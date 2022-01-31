@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Medicamento {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long Medicamento_id;
+    private Long medicamentoId;
 
     private String nombre;
 }

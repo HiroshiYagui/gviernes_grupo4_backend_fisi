@@ -20,13 +20,13 @@ import static javax.persistence.GenerationType.IDENTITY;;
 public class Receta {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long receta_id;
+    private Long recetaId;
 
     private Timestamp fecha;
 
     private String diagnostico;
     private boolean vigencia;
     @OneToOne(fetch = LAZY)
-    @JoinColumn(name = "cita_id" , referencedColumnName = "cita_id")
+    @JoinColumn(name = "citaId" , referencedColumnName = "citaId")
     private Cita cita;
 }

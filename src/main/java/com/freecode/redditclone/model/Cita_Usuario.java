@@ -25,11 +25,12 @@ public class Cita_Usuario  {
     
     @MapsId("cita_id")
     @OneToOne(fetch=LAZY)
-    @JoinColumn(name="cita_id",referencedColumnName="cita_id")
+    @JoinColumn(name="cita_id",referencedColumnName="citaId")
     private Cita cita;
-    @MapsId("Historial_id")
+    @MapsId("historial_id")
     @OneToOne(fetch=LAZY)
-    @JoinColumn(name="Historial_id",referencedColumnName="historial_id")
+    @JoinColumn(name="historial_id",referencedColumnName="historialId")
     private Historial historial;
+
     
 }

@@ -23,7 +23,7 @@ public class MailService {
     public void sendMail(NotificationEmail notificationEmail){
         MimeMessagePreparator messagePreparator=mimeMessage ->{
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom("springreddit@email.com");
+            messageHelper.setFrom("clinicaUNMSM@unmsm.com.pe");
             messageHelper.setTo(notificationEmail.getRecipient());
             messageHelper.setSubject(notificationEmail.getSubject());
             messageHelper.setText(mailContentBuilder.build(notificationEmail.getBody()));

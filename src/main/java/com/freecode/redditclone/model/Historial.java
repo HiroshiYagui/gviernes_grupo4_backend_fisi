@@ -31,11 +31,11 @@ import static javax.persistence.GenerationType.IDENTITY;;
 public class Historial {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long historial_id;
+    private Long historialId;
     
     private Timestamp fecha_creacion;
 
     @OneToOne(fetch=LAZY)
-    @JoinColumn(name="usuario_id",referencedColumnName="usuario_id")
+    @JoinColumn(name="usuarioId",referencedColumnName="usuarioId")
     private Usuario usuario;
 }

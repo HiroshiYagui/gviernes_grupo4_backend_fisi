@@ -24,7 +24,7 @@ import static javax.persistence.GenerationType.IDENTITY;;
 public class Cita {
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long cita_id;
+    private Long citaId;
     private Date fecha;
     private String especialidad;
     private Time hora;

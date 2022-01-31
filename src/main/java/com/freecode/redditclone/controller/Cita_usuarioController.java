@@ -34,6 +34,7 @@ public class Cita_usuarioController {
 
     @PostMapping("/save")
     public ResponseEntity<Void> Save(@RequestBody Cita_UsuarioDto cita_UsuarioDto){
+        System.out.println(cita_UsuarioDto);
         cita_UsuarioService.save(cita_UsuarioDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

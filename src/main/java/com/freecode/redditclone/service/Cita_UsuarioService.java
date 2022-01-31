@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -50,18 +51,21 @@ public class Cita_UsuarioService {
         cita.setDisponible(false);
         Historial historial=historialRepository.findById(cita_UsuarioDto.getHistorial_id())
                             .orElseThrow(() -> new CitaNotFoundException(cita_UsuarioDto.getHistorial_id().toString()));
-
         Cita_Usuario cita_Usuario=new Cita_Usuario();
         cita_Usuario.setCita(cita);
         cita_Usuario.setHistorial(historial);
+        System.out.println(cita_Usuario.getCita_UsuarioId().getCita_id());
+        System.out.println(cita_Usuario.getCita_UsuarioId().getHistorial_id());
         cita_UsuarioRepository.save(cita_Usuario);
         citaRepository.save(cita);
     }
 
     @Transactional(readOnly=true)
     public List<CitaDispDto> getByUsuario(HistorialDto historialDto){
-        List<Long> citas_ids=cita_UsuarioRepository.findAllByHistorial_id(historialDto.getHistorial_id());
-        List<Cita> citas=citaRepository.findByIds(citas_ids);
+        List<Cita_Usuario> citas_usuarios=cita_UsuarioRepository.findAllByhistorial_historialId(historialDto.getHistorial_id());
+        List<Cita> citasinUsuario= citas_usuarios.stream().map(Cita_Usuario::getCita).collect(toList());
+        List<Long> citas_id=citasinUsuario.stream().map(Cita::getCitaId).collect(toList());
+        List<Cita> citas=citaRepository.findAllByCitaIdIn(citas_id);
         return citas.stream().map(citaMapper::mapToDispDto).collect(toList());
     }
     

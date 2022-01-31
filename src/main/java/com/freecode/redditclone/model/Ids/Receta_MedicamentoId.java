@@ -9,6 +9,6 @@ import lombok.Data;
 @Data
 @Embeddable
 public class Receta_MedicamentoId implements Serializable {
-    private Long Receta_id;
-    private Long Medicamento_id;
+    private Long recetaId;
+    private Long medicamentoId;
 }

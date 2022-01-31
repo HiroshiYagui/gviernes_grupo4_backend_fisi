@@ -17,7 +17,7 @@ import javax.persistence.Entity;;
 public class Usuario {
     @Id
     @GeneratedValue(strategy=IDENTITY)
-    private Long usuario_id;
+    private Long usuarioId;
 
     private String nombre;
     private String apellido;
@@ -29,6 +29,6 @@ public class Usuario {
     private String contrasena;
     private String telefono;
     @OneToOne(fetch=LAZY)
-    @JoinColumn(name="historial_id",referencedColumnName="historial_id")
+    @JoinColumn(name="historialId",referencedColumnName="historialId")
     private Historial historial;
 }
