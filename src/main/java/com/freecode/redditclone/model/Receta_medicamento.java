@@ -24,14 +24,14 @@ public class Receta_medicamento  {
     @EmbeddedId
     private Receta_MedicamentoId receta_MedicamentoId;
 
-    @MapsId("recetaId")
+    @MapsId("receta_id")
     @OneToOne(fetch = LAZY)
-    @JoinColumn(name = "recetaId",referencedColumnName = "recetaId")
+    @JoinColumn(name = "receta_id",referencedColumnName = "recetaId")
     private Receta receta;
 
-    @MapsId("medicamentoId")
+    @MapsId("medicamento_id")
     @OneToOne(fetch = LAZY)
-    @JoinColumn(name = "medicamentoId",referencedColumnName = "medicamentoId")
+    @JoinColumn(name = "medicamento_id",referencedColumnName = "medicamentoId")
     private Medicamento medicamento;
 
     private int cantidad;

@@ -3,8 +3,10 @@ package com.freecode.redditclone.controller;
 import java.util.List;
 
 import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.dto.MedicamentoDto;
 import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.service.CitaService;
+import com.freecode.redditclone.service.MedicamentoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,38 +23,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.ResponseEntity.status;
 
-@RequestMapping("api/citas")
+@RequestMapping("api/medicamentos")
 @RestController
 public class MedicamentoController {
     @Autowired
-    private  CitaService citaService;
+    private  MedicamentoService medicamentoService;
 
 
     @PostMapping
-    public ResponseEntity<Void> CreateCita(@RequestBody CitaDto citaDto){
-        citaService.create(citaDto);
+    public ResponseEntity<Void> CreateMedicamento(@RequestBody MedicamentoDto medicamentoDto){
+        medicamentoService.create(medicamentoDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<CitaDto>> getAllCitas(){
-        return status(HttpStatus.OK).body(citaService.getAllCitas());
+    public ResponseEntity<List<MedicamentoDto>> getAllMedicamentos(){
+        return status(HttpStatus.OK).body(medicamentoService.getAllMedicamentos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CitaDto> getCita(@PathVariable Long id){
-        return status(HttpStatus.OK).body(citaService.getCita(id));
+    public ResponseEntity<MedicamentoDto> getMedicamento(@PathVariable Long id){
+        return status(HttpStatus.OK).body(medicamentoService.getMedicamento(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> DeleteCita(@PathVariable Long id){
-        citaService.delete(id);
+    public ResponseEntity<Void> DeleteMedicamento(@PathVariable Long id){
+        medicamentoService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> ModifyCita(@PathVariable Long id, @RequestBody CitaDto citaDto){
-        citaService.modify(citaDto,id);
+    public ResponseEntity<Void> ModifyMedicamento(@PathVariable Long id, @RequestBody MedicamentoDto medicamentoDto){
+        medicamentoService.modify(medicamentoDto,id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 /*

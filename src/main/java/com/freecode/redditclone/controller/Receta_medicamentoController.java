@@ -26,7 +26,7 @@ import static org.springframework.http.ResponseEntity.status;
 @RequestMapping("api/citas")
 @RestController
 public class Receta_medicamentoController {
-    @Autowired
+   /* @Autowired
     private  Cita_UsuarioService cita_UsuarioService;
     @Autowired
     private  CitaService citaService;
