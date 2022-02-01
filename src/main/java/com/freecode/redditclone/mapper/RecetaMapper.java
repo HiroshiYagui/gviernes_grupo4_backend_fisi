@@ -6,7 +6,6 @@ import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.model.Cita;
 import com.freecode.redditclone.model.Receta;
-import com.github.marlonlom.utilities.timeago.TimeAgo;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

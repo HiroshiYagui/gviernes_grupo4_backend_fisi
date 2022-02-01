@@ -5,7 +5,6 @@ import java.util.Optional;
 import com.freecode.redditclone.dto.MedicamentoDto;
 import com.freecode.redditclone.model.Medicamento;
 import com.freecode.redditclone.model.Receta;
-import com.github.marlonlom.utilities.timeago.TimeAgo;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
