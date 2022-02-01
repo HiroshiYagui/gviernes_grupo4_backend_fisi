@@ -26,12 +26,12 @@ public class MailService {
             messageHelper.setFrom("clinicaUNMSM@unmsm.com.pe");
             messageHelper.setTo(notificationEmail.getRecipient());
             messageHelper.setSubject(notificationEmail.getSubject());
-            messageHelper.setText(mailContentBuilder.build(notificationEmail.getBody()));
+            messageHelper.setText(mailContentBuilder.build(notificationEmail.getBody()),true);
         };
         try{
             mailSender.send(messagePreparator);
         }catch(MailException e){
-            throw new SpringException("Exception ocurred when sending email");
+            e.printStackTrace();
         }
     }
 }

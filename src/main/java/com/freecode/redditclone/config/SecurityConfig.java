@@ -15,14 +15,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
-    @Autowired
-    private  UserDetailsService userDetailsService;
-
+    
 
     @Override
     public void configure(HttpSecurity httpSecurity) throws Exception{
@@ -31,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/api/auth/**").permitAll()
         .antMatchers("/api/citas/**").permitAll()
         .antMatchers("/api/pagos/**").permitAll()
+        .antMatchers("/api/historial/**").permitAll()
         .anyRequest()
         .authenticated();
         
