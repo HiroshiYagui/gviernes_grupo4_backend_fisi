@@ -16,7 +16,6 @@
 	<properties>
 		<java.version>8</java.version>
 		 <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
-		 <start-class>com.freecode.redditclone.RedditCloneApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -107,6 +106,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>    
+            		<mainClass>com.freecode.redditclone.RedditCloneApplication</mainClass>
+        		</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
