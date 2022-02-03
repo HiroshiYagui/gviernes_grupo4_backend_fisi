@@ -5,6 +5,7 @@ package com.freecode.redditclone.service;
 import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.dto.EspecialidadAndFechaDto;
+import com.freecode.redditclone.dto.RespDto;
 import com.freecode.redditclone.exceptions.SpringException;
 import com.freecode.redditclone.exceptions.RecetaNotFoundException;
 import com.freecode.redditclone.exceptions.CitaNotFoundException;
@@ -21,6 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static java.util.stream.Collectors.toList;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -66,9 +70,31 @@ public class CitaService {
     }
 
     @Transactional(readOnly=true)
-    public List<CitaDispDto> getByEspecialidad(String especialidad){
+    public List<RespDto> getByEspecialidad(String especialidad){
         List<Cita> citas=citaRepository.findAllByEspecialidad(especialidad);
-        return citas.stream().map(citaMapper::mapToDispDto).collect(toList());
+        List<Date> dates=new ArrayList<Date>();
+        dates.add(Date.valueOf("2022-01-24"));
+        dates.add(Date.valueOf("2022-01-25"));
+        dates.add(Date.valueOf("2022-01-26"));
+        dates.add(Date.valueOf("2022-01-27"));
+        dates.add(Date.valueOf("2022-01-28"));
+        dates.add(Date.valueOf("2022-01-29"));
+        dates.add(Date.valueOf("2022-01-30"));
+        int index=0;
+        List<RespDto> respDtos=new ArrayList<RespDto>();
+        Date pasado=citas.get(0).getFecha();
+        for(Cita cita:citas){
+            if(dates.get(index).compareTo(cita.getFecha())==0 && cita.isDisponible()){
+                respDtos.add(new RespDto(index,true));
+                index++;
+            }else if(cita.getFecha().compareTo(pasado)!=0){
+                respDtos.add(new RespDto(index,false));
+                index++;
+                pasado=cita.getFecha();
+            }
+        }
+
+        return respDtos;
     }
 
     @Transactional(readOnly=true)

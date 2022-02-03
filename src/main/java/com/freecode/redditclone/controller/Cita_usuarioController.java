@@ -8,6 +8,7 @@ import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.dto.EspecialidadAndFechaDto;
 import com.freecode.redditclone.dto.HistorialDto;
+import com.freecode.redditclone.dto.RespDto;
 import com.freecode.redditclone.service.Cita_UsuarioService;
 import com.freecode.redditclone.service.CitaService;
 
@@ -42,8 +43,10 @@ public class Cita_usuarioController {
     }
 
     @GetMapping("/filterEspecialidad/{especialidad}")
-    public ResponseEntity<List<CitaDispDto>> getCitabyEspecialidad(@PathVariable String especialidad){
-        return status(HttpStatus.OK).body(citaService.getByEspecialidad(especialidad));
+    public ResponseEntity<Map<String,List<RespDto>>> getCitabyEspecialidad(@PathVariable String especialidad){
+        Map<String,List<RespDto>> citaMap = new HashMap<>();
+        citaMap.put("fechas", citaService.getByEspecialidad(especialidad));
+        return status(HttpStatus.OK).body(citaMap);
     }
 
     @GetMapping("/filterFecha")
