@@ -1,5 +1,7 @@
 package com.freecode.redditclone.controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.freecode.redditclone.dto.Cita_UsuarioDto;
 import com.freecode.redditclone.dto.CitaDto;
@@ -50,8 +52,11 @@ public class Cita_usuarioController {
     }
 
     @GetMapping("/listUser")
-    public ResponseEntity<List<CitaDispDto>> getListCitaByUsuario(@RequestBody HistorialDto historialDto){
-        return status(HttpStatus.OK).body(cita_UsuarioService.getByUsuario(historialDto));
+    public ResponseEntity<Map<String,List<CitaDispDto>>> getListCitaByUsuario(@RequestBody HistorialDto historialDto){
+        
+        Map<String,List<CitaDispDto>> citaMap = new HashMap<>();
+        citaMap.put("results", cita_UsuarioService.getByUsuario(historialDto));
+        return status(HttpStatus.OK).body(citaMap);
     }
 
     @GetMapping("/list/{id}")
