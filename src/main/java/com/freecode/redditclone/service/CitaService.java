@@ -82,15 +82,14 @@ public class CitaService {
         dates.add(Date.valueOf("2022-01-30"));
         int index=0;
         List<RespDto> respDtos=new ArrayList<RespDto>();
-        Date pasado=citas.get(0).getFecha();
         for(Cita cita:citas){
             if(dates.get(index).compareTo(cita.getFecha())==0 && cita.isDisponible()){
                 respDtos.add(new RespDto(index,true));
                 index++;
-            }else if(cita.getFecha().compareTo(pasado)!=0){
+            }
+            else if(cita.getFecha().compareTo((dates.get(index)))!=0){
                 respDtos.add(new RespDto(index,false));
                 index++;
-                pasado=cita.getFecha();
             }
         }
 
