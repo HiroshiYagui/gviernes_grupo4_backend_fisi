@@ -3,6 +3,7 @@ package com.freecode.redditclone.controller;
 import com.freecode.redditclone.dto.PagoDto;
 import com.freecode.redditclone.dto.PagoRespuestaDto;
 import com.freecode.redditclone.service.PagosService;
+import com.stripe.model.PaymentIntent;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class PagoController {
     private PagosService pagosService;
 
     @PostMapping("/Intent")
-    public ResponseEntity<String> CreateCheckout(@RequestBody PagoDto pagoDto){
+    public ResponseEntity<PaymentIntent> CreateCheckout(@RequestBody PagoDto pagoDto){
         return status(HttpStatus.OK).body(pagosService.CreatePaymentIntent(pagoDto));
     }
 }

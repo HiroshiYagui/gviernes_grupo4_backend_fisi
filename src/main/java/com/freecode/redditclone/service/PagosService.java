@@ -18,7 +18,7 @@ public class PagosService {
     @Value("${stripe.secret.key}")
     private String stripeSecretKey;
 
-    public String CreatePaymentIntent(PagoDto pagoDto){
+    public PaymentIntent CreatePaymentIntent(PagoDto pagoDto){
         Stripe.apiKey = stripeSecretKey;
         try{
         PaymentIntentCreateParams createParams = new PaymentIntentCreateParams.Builder()
@@ -27,7 +27,7 @@ public class PagosService {
                     .addPaymentMethodType("card")
                     .build();
         PaymentIntent intent = PaymentIntent.create(createParams);
-        return intent.getClientSecret();    
+        return intent;    
         }catch(StripeException se) {
             se.printStackTrace();
             
