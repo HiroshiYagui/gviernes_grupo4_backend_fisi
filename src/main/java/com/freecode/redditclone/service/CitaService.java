@@ -80,9 +80,10 @@ public class CitaService {
         dates.add(Date.valueOf("2022-01-28"));
         dates.add(Date.valueOf("2022-01-29"));
         dates.add(Date.valueOf("2022-01-30"));
-        int index=0;
         List<RespDto> respDtos=new ArrayList<RespDto>();
+        int index=0;
         for(Cita cita:citas){
+            if(index<7){
             if(dates.get(index).compareTo(cita.getFecha())==0 && cita.isDisponible()){
                 respDtos.add(new RespDto(index,true));
                 index++;
@@ -90,6 +91,7 @@ public class CitaService {
             else if(cita.getFecha().compareTo((dates.get(index)))!=0){
                 respDtos.add(new RespDto(index,false));
                 index++;
+            }
             }
         }
 
