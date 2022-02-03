@@ -9,15 +9,14 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.freecode</groupId>
-	<artifactId>redditclone</artifactId>
+	<artifactId>reddit-clone</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-	<name>redditclone</name>
+	<name>reddit-clone</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>8</java.version>
 		 <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
-		 <start-class>com.freecode.redditclone.RedditCloneApplication</start-class>
+		 <start-class>com.freecode.redditclone.main</start-class>
 	</properties>
 
 	<dependencies>
@@ -106,6 +105,10 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
