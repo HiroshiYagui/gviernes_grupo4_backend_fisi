@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.dto.MedicamentoDto;
-import com.freecode.redditclone.dto.CitaDto;
-import com.freecode.redditclone.service.CitaService;
 import com.freecode.redditclone.service.MedicamentoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
