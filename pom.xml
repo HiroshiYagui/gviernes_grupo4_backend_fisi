@@ -143,7 +143,7 @@
 					<archive>
 						<manifest>
 						<addClasspath>true</addClasspath>
-						<mainClass>com.package.MainClass</mainClass>
+						<mainClass>com.freecode.redditclone.RedditCloneApplication</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
