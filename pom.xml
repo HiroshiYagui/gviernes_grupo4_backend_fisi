@@ -11,6 +11,7 @@
 	<groupId>com.freecode</groupId>
 	<artifactId>redditclone</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>redditclone</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -104,13 +105,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>    
-              		<mainClass>com.freecode.redditclone.RedditCloneApplication</mainClass>
-          		</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
