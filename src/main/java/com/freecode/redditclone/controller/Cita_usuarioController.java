@@ -51,17 +51,17 @@ public class Cita_usuarioController {
         return status(HttpStatus.OK).body(citaService.getByEspecialidadAndFecha(especialidadAndFechaDto));
     }
 
-    @GetMapping("/listUser")
-    public ResponseEntity<Map<String,List<CitaDispDto>>> getListCitaByUsuario(@RequestBody HistorialDto historialDto){
+    @GetMapping("/listUser/{hid}")
+    public ResponseEntity<Map<String,List<CitaDispDto>>> getListCitaByUsuario(@PathVariable Long hid){
         
         Map<String,List<CitaDispDto>> citaMap = new HashMap<>();
-        citaMap.put("results", cita_UsuarioService.getByUsuario(historialDto));
+        citaMap.put("results", cita_UsuarioService.getByUsuario(hid));
         return status(HttpStatus.OK).body(citaMap);
     }
 
-    @GetMapping("/list/{id}")
-    public ResponseEntity <CitaDispDto> getCitaByUsuario(@RequestBody HistorialDto historialDto, @PathVariable int id){
-        return status(HttpStatus.OK).body(cita_UsuarioService.getByUsuario(historialDto).get(id));
+    @GetMapping("/list/{hid}/{id}")
+    public ResponseEntity <CitaDispDto> getCitaByUsuario(@PathVariable Long hid, @PathVariable int id){
+        return status(HttpStatus.OK).body(cita_UsuarioService.getByUsuario(hid).get(id));
     }
 /*
     @GetMapping

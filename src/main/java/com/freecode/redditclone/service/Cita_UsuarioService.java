@@ -61,8 +61,8 @@ public class Cita_UsuarioService {
     }
 
     @Transactional(readOnly=true)
-    public List<CitaDispDto> getByUsuario(HistorialDto historialDto){
-        List<Cita_Usuario> citas_usuarios=cita_UsuarioRepository.findAllByhistorial_historialId(historialDto.getHistorial_id());
+    public List<CitaDispDto> getByUsuario(Long hid){
+        List<Cita_Usuario> citas_usuarios=cita_UsuarioRepository.findAllByhistorial_historialId(hid);
         List<Cita> citasinUsuario= citas_usuarios.stream().map(Cita_Usuario::getCita).collect(toList());
         List<Long> citas_id=citasinUsuario.stream().map(Cita::getCitaId).collect(toList());
         List<Cita> citas=citaRepository.findAllByCitaIdIn(citas_id);
