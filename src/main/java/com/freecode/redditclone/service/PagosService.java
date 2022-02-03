@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.freecode.redditclone.dto.PagoDto;
-import com.freecode.redditclone.dto.PagoRespuestaDto;
+import com.freecode.redditclone.dto.PaymentIntentDto;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
@@ -18,7 +18,7 @@ public class PagosService {
     @Value("${stripe.secret.key}")
     private String stripeSecretKey;
 
-    public PaymentIntent CreatePaymentIntent(PagoDto pagoDto){
+    public PaymentIntentDto CreatePaymentIntent(PagoDto pagoDto){
         Stripe.apiKey = stripeSecretKey;
         try{
         PaymentIntentCreateParams createParams = new PaymentIntentCreateParams.Builder()
@@ -27,7 +27,9 @@ public class PagosService {
                     .addPaymentMethodType("card")
                     .build();
         PaymentIntent intent = PaymentIntent.create(createParams);
-        return intent;    
+        PaymentIntentDto paymentIntentDto=new PaymentIntentDto();
+        paymentIntentDto.setClientSecret(intent.getClientSecret());
+        return paymentIntentDto;    
         }catch(StripeException se) {
             se.printStackTrace();
             
