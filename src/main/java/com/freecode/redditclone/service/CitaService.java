@@ -71,7 +71,7 @@ public class CitaService {
 
     @Transactional(readOnly=true)
     public List<RespDto> getByEspecialidad(String especialidad){
-        List<Cita> citas=citaRepository.findAllByEspecialidad(especialidad);
+        List<Date> fechacitas=citaRepository.findDistinctFechas(especialidad);
         List<Date> dates=new ArrayList<Date>();
         dates.add(Date.valueOf("2022-01-24"));
         dates.add(Date.valueOf("2022-01-25"));
@@ -82,17 +82,20 @@ public class CitaService {
         dates.add(Date.valueOf("2022-01-30"));
         List<RespDto> respDtos=new ArrayList<RespDto>();
         int index=0;
+        int xedni=0;
         
-        for(Cita cita:citas){
-            if(index<7){
-            if(dates.get(index).compareTo(cita.getFecha())==0 && cita.isDisponible()){
-                respDtos.add(new RespDto(index,true));
-                index++;
-            }
-            else if(cita.getFecha().compareTo((dates.get(index)))!=0){
+        while(index<7){
+
+            if(dates.get(index).compareTo(fechacitas.get(xedni))<0){
                 respDtos.add(new RespDto(index,false));
                 index++;
             }
+            else if(dates.get(index).compareTo((fechacitas.get(xedni)))==0){
+                respDtos.add(new RespDto(index,true));
+                xedni++;
+                index++;
+            }else{
+                xedni++;
             }
         }
 
