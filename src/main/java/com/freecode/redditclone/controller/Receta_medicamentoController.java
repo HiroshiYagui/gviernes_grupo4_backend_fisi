@@ -34,15 +34,19 @@ public class Receta_medicamentoController {
     @Autowired
     private MedicamentoService medicamentoService;
 
+    @Autowired
+    private Receta_MedicamentoService receta_medicamentoService;
+
     @GetMapping("/filterMedicamentos/{id}")
     public ResponseEntity<Map<String,List<MedicamentoDto>>> getMedicamentosByReceta(@PathVariable Long id){
         Map<String,List<MedicamentoDto>> medicamentoMap = new HashMap<>();
-        medicamentoMap.put("Medicamentos", medicamentoService.getAllMedicamentos());
+        medicamentoMap.put("Medicamentos", receta_medicamentoService.getByReceta(id));
+       // medicamentoMap.put("Medicamentos", medicamentoService.getMedicamento(id));
         return status(HttpStatus.OK).body(medicamentoMap);
     }
 
 
-    
+
    /* @Autowired
     private  Cita_UsuarioService cita_UsuarioService;
     @Autowired

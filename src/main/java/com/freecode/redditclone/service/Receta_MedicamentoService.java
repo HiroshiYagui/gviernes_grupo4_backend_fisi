@@ -50,7 +50,7 @@ public class Receta_MedicamentoService {
     private MedicamentoMapper medicamentoMapper;
 
     @Transactional(readOnly=true)
-    List <MedicamentoDto> getByReceta (Long hid){
+    public List <MedicamentoDto> getByReceta (Long hid){
         List<Receta_medicamento> receta_medicamento=receta_medicamentoRepository.findAllByReceta_recetaId(hid);
         List<Medicamento> recetaMedicamentos= receta_medicamento.stream().map(Receta_medicamento::getMedicamento).collect(toList());
         List<Long> medicamentos_id=recetaMedicamentos.stream().map(Medicamento::getMedicamentoId).collect(toList());
