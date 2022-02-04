@@ -1,4 +1,5 @@
 package com.freecode.redditclone.controller;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,10 +51,10 @@ public class Cita_usuarioController {
         return status(HttpStatus.OK).body(citaMap);
     }
 
-    @GetMapping("/filterFecha")
-    public ResponseEntity<Map<String,List<RespHDto>>> getCitabyEspecialidadAndFecha(@RequestBody EspecialidadAndFechaDto especialidadAndFechaDto){
+    @GetMapping("/filterFecha/{especialidad}/{fecha}")
+    public ResponseEntity<Map<String,List<RespHDto>>> getCitabyEspecialidadAndFecha(@PathVariable String especialidad, @PathVariable Date fecha){
         Map<String,List<RespHDto>> citaMap = new HashMap<>();
-        citaMap.put("horas", citaService.getByEspecialidadAndFecha(especialidadAndFechaDto));
+        citaMap.put("horas", citaService.getByEspecialidadAndFecha(especialidad,fecha));
         return status(HttpStatus.OK).body(citaMap);
     }
 

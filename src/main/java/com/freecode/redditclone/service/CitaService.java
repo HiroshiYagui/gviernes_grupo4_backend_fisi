@@ -109,8 +109,8 @@ public class CitaService {
     }
 
     @Transactional(readOnly=true)
-    public List<RespHDto> getByEspecialidadAndFecha(EspecialidadAndFechaDto especialidadAndFechaDto){
-        List<Time> tiemposcitas=citaRepository.findDistinctHoras(especialidadAndFechaDto.getEspecialidad(), especialidadAndFechaDto.getFecha());
+    public List<RespHDto> getByEspecialidadAndFecha(String especialidad, Date fecha){
+        List<Time> tiemposcitas=citaRepository.findDistinctHoras(especialidad, fecha);
         List<Time> times=new ArrayList<Time>();
         times.add(Time.valueOf("09:00:00"));
         times.add(Time.valueOf("09:20:00"));
