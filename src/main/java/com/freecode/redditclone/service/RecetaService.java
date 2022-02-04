@@ -42,11 +42,14 @@ public class RecetaService {
         Cita cita= citaRepository.findById(id)
                     .orElseThrow(() -> new CitaNotFoundException(id.toString()));
         
-        Receta receta = recetaRepository.findById(cita.getCitaId())
-                    .orElseThrow(() -> new RecetaNotFoundException(cita.toString()));
-         
+        Receta receta = recetaRepository.findByIdCita(cita.getCitaId())
+                    .orElseThrow(() -> new RecetaNotFoundException(cita.toString()));        
+        
         return recetaMapper.mapToDto(receta);            
     }
+
+
+    
 
 
  /*   @Autowired
