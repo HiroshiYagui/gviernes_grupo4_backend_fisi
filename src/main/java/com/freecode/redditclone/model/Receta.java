@@ -1,5 +1,6 @@
 package com.freecode.redditclone.model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
