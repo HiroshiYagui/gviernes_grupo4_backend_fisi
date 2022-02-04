@@ -2,7 +2,8 @@ package com.freecode.redditclone.dto;
 
 import java.sql.Date;
 
-import com.stripe.param.UsageRecordCreateOnSubscriptionItemParams.Timestamp;
+
+import java.sql.Timestamp;
 
 import lombok.Data;
 
