@@ -8,8 +8,10 @@ import lombok.Data;
 
 @Data
 public class RecetaDto {
-    private String diagnostico;
     private Timestamp fecha;
+
+    private String diagnostico;
+
     private boolean vigencia;
     private Long cita_id;
 }

@@ -1,12 +1,17 @@
 package com.freecode.redditclone.controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.freecode.redditclone.dto.Cita_UsuarioDto;
 import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.dto.EspecialidadAndFechaDto;
 import com.freecode.redditclone.dto.HistorialDto;
+import com.freecode.redditclone.dto.MedicamentoDto;
 import com.freecode.redditclone.service.Cita_UsuarioService;
+import com.freecode.redditclone.service.MedicamentoService;
+import com.freecode.redditclone.service.Receta_MedicamentoService;
 import com.freecode.redditclone.service.CitaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +28,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.ResponseEntity.status;
 
-@RequestMapping("api/citas")
+@RequestMapping("api/receta")
 @RestController
 public class Receta_medicamentoController {
+    @Autowired
+    private MedicamentoService medicamentoService;
+
+    @GetMapping("/filterMedicamentos/{id}")
+    public ResponseEntity<Map<String,List<MedicamentoDto>>> getMedicamentosByReceta(@PathVariable Long id){
+        Map<String,List<MedicamentoDto>> medicamentoMap = new HashMap<>();
+        medicamentoMap.put("Medicamentos", medicamentoService.getAllMedicamentos());
+        return status(HttpStatus.OK).body(medicamentoMap);
+    }
+
+
+    
    /* @Autowired
     private  Cita_UsuarioService cita_UsuarioService;
     @Autowired

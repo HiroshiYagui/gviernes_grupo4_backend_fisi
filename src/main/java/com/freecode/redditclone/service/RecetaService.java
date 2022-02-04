@@ -36,7 +36,6 @@ public class RecetaService {
     @Autowired
     private RecetaMapper recetaMapper;
 
-
     @Transactional(readOnly=true)
     public RecetaDto getReceta(Long id){
         Receta receta = recetaRepository.findBycita_citaId(id)

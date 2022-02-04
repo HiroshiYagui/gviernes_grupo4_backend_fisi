@@ -3,16 +3,23 @@ package com.freecode.redditclone.service;
 import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.dto.Cita_UsuarioDto;
 import com.freecode.redditclone.dto.HistorialDto;
+import com.freecode.redditclone.dto.MedicamentoDto;
+import com.freecode.redditclone.dto.Receta_MedicamentoDto;
 import com.freecode.redditclone.exceptions.SpringException;
 import com.freecode.redditclone.exceptions.RecetaNotFoundException;
 import com.freecode.redditclone.exceptions.CitaNotFoundException;
 import com.freecode.redditclone.mapper.Cita_UsuarioMapper;
+import com.freecode.redditclone.mapper.MedicamentoMapper;
 import com.freecode.redditclone.model.Cita_Usuario;
 import com.freecode.redditclone.model.Historial;
+import com.freecode.redditclone.model.Medicamento;
 import com.freecode.redditclone.model.Receta;
+import com.freecode.redditclone.model.Receta_medicamento;
 import com.freecode.redditclone.model.Cita;
 import com.freecode.redditclone.repository.Cita_UsuarioRepository;
 import com.freecode.redditclone.repository.HistorialRepository;
+import com.freecode.redditclone.repository.MedicamentoRepository;
+import com.freecode.redditclone.repository.Receta_medicamentoRepository;
 import com.freecode.redditclone.repository.CitaRepository;
 import com.freecode.redditclone.model.Ids.Cita_UsuarioId;
 import com.freecode.redditclone.mapper.CitaMapper;
@@ -31,6 +38,30 @@ import java.util.List;
 @Service
 @Transactional
 public class Receta_MedicamentoService {
+
+    @Autowired
+    private Receta_medicamentoRepository receta_medicamentoRepository;
+
+    @Autowired
+    private MedicamentoRepository medicamentoRepository;
+
+
+    @Autowired
+    private MedicamentoMapper medicamentoMapper;
+
+    @Transactional(readOnly=true)
+    List <MedicamentoDto> getByReceta (Long hid){
+        List<Receta_medicamento> receta_medicamento=receta_medicamentoRepository.findAllByReceta_recetaId(hid);
+        List<Medicamento> recetaMedicamentos= receta_medicamento.stream().map(Receta_medicamento::getMedicamento).collect(toList());
+        List<Long> medicamentos_id=recetaMedicamentos.stream().map(Medicamento::getMedicamentoId).collect(toList());
+        List<Medicamento> medicamentos=medicamentoRepository.findAllById(medicamentos_id);
+
+        return medicamentos.stream().map(medicamentoMapper::mapToDto).collect(toList());            
+    }
+
+
+
+
    /* @Autowired
     private  Cita_UsuarioRepository cita_UsuarioRepository;
     
