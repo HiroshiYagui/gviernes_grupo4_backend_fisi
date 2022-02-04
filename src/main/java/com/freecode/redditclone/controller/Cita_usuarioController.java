@@ -51,7 +51,7 @@ public class Cita_usuarioController {
         return status(HttpStatus.OK).body(citaMap);
     }
 
-    @PostMapping("/filterFecha/{especialidad}/{fecha}")
+    @GetMapping("/filterFecha/{especialidad}/{fecha}")
     public ResponseEntity<Map<String,List<RespHDto>>> getCitabyEspecialidadAndFecha(@PathVariable String especialidad, @PathVariable Date fecha){
         Map<String,List<RespHDto>> citaMap = new HashMap<>();
         citaMap.put("horas", citaService.getByEspecialidadAndFecha(especialidad,fecha));
