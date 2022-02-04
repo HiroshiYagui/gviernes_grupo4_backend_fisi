@@ -10,6 +10,7 @@ import java.sql.Date;
 import com.freecode.redditclone.model.Cita;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface CitaRepository extends JpaRepository<Cita,Long> {
@@ -18,6 +19,12 @@ public interface CitaRepository extends JpaRepository<Cita,Long> {
     Optional<Cita> findByHoraAndFechaAndEspecialidad(Time Hora,Date Fecha,String Especialidad);
 
     List<Cita> findAllByEspecialidad(String Especialidad);
+
+    @Query(value="select distinct c.fecha from cita c where c.especialidad=?1 and c.disponible=true order by c.fecha asc", nativeQuery=true)
+    List<Date> findDistinctFechas(String Especialidad);
+
+    @Query(value="select distinct c.hora from cita c where c.especialidad=?1 and c.fecha=?2 and c.disponible=true order by c.hora asc", nativeQuery=true)
+    List<Time> findDistinctHoras(String Especialidad, Date Fecha);
 
     List<Cita> findAllByEspecialidadAndFecha(String Especialidad,Date Fecha);
 

@@ -54,8 +54,6 @@ public class Cita_UsuarioService {
         Cita_Usuario cita_Usuario=new Cita_Usuario();
         cita_Usuario.setCita(cita);
         cita_Usuario.setHistorial(historial);
-        System.out.println(cita_Usuario.getCita_UsuarioId().getCita_id());
-        System.out.println(cita_Usuario.getCita_UsuarioId().getHistorial_id());
         cita_UsuarioRepository.save(cita_Usuario);
         citaRepository.save(cita);
     }
