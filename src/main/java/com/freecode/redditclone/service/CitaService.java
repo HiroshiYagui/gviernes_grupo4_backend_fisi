@@ -6,6 +6,7 @@ import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.dto.EspecialidadAndFechaDto;
 import com.freecode.redditclone.dto.RespDto;
+import com.freecode.redditclone.dto.RespHDto;
 import com.freecode.redditclone.exceptions.SpringException;
 import com.freecode.redditclone.exceptions.RecetaNotFoundException;
 import com.freecode.redditclone.exceptions.CitaNotFoundException;
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static java.util.stream.Collectors.toList;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,28 +86,76 @@ public class CitaService {
         int index=0;
         int xedni=0;
         
-        while(index<7){
-
-            if(dates.get(index).compareTo(fechacitas.get(xedni))<0){
-                respDtos.add(new RespDto(index,false));
-                index++;
-            }
-            else if(dates.get(index).compareTo((fechacitas.get(xedni)))==0){
-                respDtos.add(new RespDto(index,true));
-                xedni++;
-                index++;
+        while(index<dates.size()){
+            if(xedni<fechacitas.size()){
+                if(dates.get(index).compareTo(fechacitas.get(xedni))<0){
+                    respDtos.add(new RespDto(index,false));
+                    index++;
+                }
+                else if(dates.get(index).compareTo((fechacitas.get(xedni)))==0){
+                    respDtos.add(new RespDto(index,true));
+                    xedni++;
+                    index++;
+                }else{
+                    xedni++;
+                }
             }else{
-                xedni++;
-            }
+                    respDtos.add(new RespDto(index,false));
+                    index++;
+                }
         }
 
         return respDtos;
     }
 
     @Transactional(readOnly=true)
-    public List<CitaDispDto> getByEspecialidadAndFecha(EspecialidadAndFechaDto especialidadAndFechaDto){
-        List<Cita> citas=citaRepository.findAllByEspecialidadAndFecha(especialidadAndFechaDto.getEspecialidad(), especialidadAndFechaDto.getFecha());
-        return citas.stream().map(citaMapper::mapToDispDto).collect(toList());
+    public List<RespHDto> getByEspecialidadAndFecha(EspecialidadAndFechaDto especialidadAndFechaDto){
+        List<Time> tiemposcitas=citaRepository.findDistinctHoras(especialidadAndFechaDto.getEspecialidad(), especialidadAndFechaDto.getFecha());
+        List<Time> times=new ArrayList<Time>();
+        times.add(Time.valueOf("09:00:00"));
+        times.add(Time.valueOf("09:20:00"));
+        times.add(Time.valueOf("09:40:00"));
+        times.add(Time.valueOf("10:00:00"));
+        times.add(Time.valueOf("10:20:00"));
+        times.add(Time.valueOf("10:40:00"));
+        times.add(Time.valueOf("11:00:00"));
+        times.add(Time.valueOf("11:20:00"));
+        times.add(Time.valueOf("11:40:00"));
+        times.add(Time.valueOf("14:00:00"));
+        times.add(Time.valueOf("14:20:00"));
+        times.add(Time.valueOf("14:40:00"));
+        times.add(Time.valueOf("15:00:00"));
+        times.add(Time.valueOf("15:20:00"));
+        times.add(Time.valueOf("15:40:00"));
+        times.add(Time.valueOf("16:00:00"));
+        times.add(Time.valueOf("16:20:00"));
+        times.add(Time.valueOf("16:40:00"));
+        times.add(Time.valueOf("17:00:00"));
+        times.add(Time.valueOf("17:20:00"));
+        times.add(Time.valueOf("17:40:00"));
+        List<RespHDto> respDtos=new ArrayList<RespHDto>();
+        int index=0;
+        int xedni=0;
+        while(index<times.size()){
+            if(xedni<tiemposcitas.size()){
+            if(times.get(index).compareTo(tiemposcitas.get(xedni))<0){
+                respDtos.add(new RespHDto(index,false));
+                index++;
+            }
+            else if(times.get(index).compareTo((tiemposcitas.get(xedni)))==0){
+                respDtos.add(new RespHDto(index,true));
+                xedni++;
+                index++;
+            }else{
+                xedni++;
+            }
+        }else{
+                respDtos.add(new RespHDto(index,false));
+                index++;
+        }
+        }
+
+        return respDtos;
     }
 
 /*

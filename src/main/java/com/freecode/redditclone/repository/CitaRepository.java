@@ -23,6 +23,9 @@ public interface CitaRepository extends JpaRepository<Cita,Long> {
     @Query(value="select distinct c.fecha from cita c where c.especialidad=?1 and c.disponible=true order by c.fecha asc", nativeQuery=true)
     List<Date> findDistinctFechas(String Especialidad);
 
+    @Query(value="select distinct c.hora from cita c where c.especialidad=?1 and c.fecha=?2 and c.disponible=true order by c.hora asc", nativeQuery=true)
+    List<Time> findDistinctHoras(String Especialidad, Date Fecha);
+
     List<Cita> findAllByEspecialidadAndFecha(String Especialidad,Date Fecha);
 
     List<Cita> findAllByCitaIdIn(List<Long> cita_ids);
