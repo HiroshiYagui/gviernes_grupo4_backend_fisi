@@ -39,12 +39,8 @@ public class RecetaService {
 
     @Transactional(readOnly=true)
     public RecetaDto getReceta(Long id){
-        Cita cita= citaRepository.findById(id)
-                    .orElseThrow(() -> new CitaNotFoundException(id.toString()));
-        
-        Receta receta = recetaRepository.findByIdCita(cita.getCitaId())
-                    .orElseThrow(() -> new RecetaNotFoundException(cita.toString()));        
-        
+        Receta receta = recetaRepository.findBycita_citaId(id)
+                    .orElseThrow(() -> new RecetaNotFoundException(id.toString()));        
         return recetaMapper.mapToDto(receta);            
     }
 

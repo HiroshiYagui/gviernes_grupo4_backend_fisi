@@ -9,8 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RecetaRepository extends JpaRepository<Receta,Long>  {
     
-    Optional<Receta> findByIdCita(Long Cita_id);
-
-
+    Optional<Receta> findBycita_citaId(Long Cita_id);
 
 }

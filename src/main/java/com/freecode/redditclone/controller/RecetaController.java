@@ -31,7 +31,7 @@ public class RecetaController {
 */
     private RecetaService recetaService;
 
-    @GetMapping("/filterReceta/{hid}")
+    @GetMapping("/filterReceta/{id}")
     public ResponseEntity<RecetaDto> getRecetaByCita(@PathVariable Long id){
         return status(HttpStatus.OK).body(recetaService.getReceta(id));
     }
