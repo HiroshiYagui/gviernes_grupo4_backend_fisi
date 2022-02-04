@@ -3,8 +3,10 @@ package com.freecode.redditclone.controller;
 import java.util.List;
 
 import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.dto.RecetaDto;
 import com.freecode.redditclone.dto.CitaDto;
 import com.freecode.redditclone.service.CitaService;
+import com.freecode.redditclone.service.RecetaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,13 +23,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.ResponseEntity.status;
 
-@RequestMapping("api/citas")
+@RequestMapping("api/receta")
 @RestController
 public class RecetaController {
   /*  @Autowired
     private  CitaService citaService;
+*/
+    private RecetaService recetaService;
+
+    @GetMapping("/filterReceta/{hid}")
+    public ResponseEntity<RecetaDto> getRecetaByCita(@PathVariable Long id){
+        return status(HttpStatus.OK).body(recetaService.getReceta(id));
+    }
 
 
+/*
     @PostMapping
     public ResponseEntity<Void> CreateCita(@RequestBody CitaDto citaDto){
         citaService.create(citaDto);
