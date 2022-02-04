@@ -2,16 +2,17 @@ package com.freecode.redditclone.service;
 
 
 
-import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.dto.RecetaDto;
 import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.dto.EspecialidadAndFechaDto;
 import com.freecode.redditclone.exceptions.SpringException;
 import com.freecode.redditclone.exceptions.RecetaNotFoundException;
 import com.freecode.redditclone.exceptions.CitaNotFoundException;
-import com.freecode.redditclone.mapper.CitaMapper;
+import com.freecode.redditclone.mapper.RecetaMapper;
 import com.freecode.redditclone.model.Cita;
 import com.freecode.redditclone.model.Receta;
 import com.freecode.redditclone.repository.CitaRepository;
+import com.freecode.redditclone.repository.RecetaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,6 +27,28 @@ import java.util.List;
 @Service
 @Transactional
 public class RecetaService {
+    @Autowired
+    private  CitaRepository citaRepository;
+
+    @Autowired
+    private  RecetaRepository recetaRepository;
+
+    @Autowired
+    private RecetaMapper recetaMapper;
+
+
+    @Transactional(readOnly=true)
+    public RecetaDto getReceta(Long id){
+        Cita cita= citaRepository.findById(id)
+                    .orElseThrow(() -> new CitaNotFoundException(id.toString()));
+        
+        Receta receta = recetaRepository.findById(cita.getCitaId())
+                    .orElseThrow(() -> new RecetaNotFoundException(cita.toString()));
+         
+        return recetaMapper.mapToDto(receta);            
+    }
+
+
  /*   @Autowired
     private  CitaRepository citaRepository;
     @Autowired
@@ -36,6 +59,7 @@ public class RecetaService {
         
         citaRepository.save(citaMapper.map(citaDto));
     }
+
 
     @Transactional(readOnly=true)
     public CitaDto getCita(Long id){

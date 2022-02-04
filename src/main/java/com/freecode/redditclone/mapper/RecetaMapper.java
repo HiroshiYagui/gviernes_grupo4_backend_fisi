@@ -2,7 +2,7 @@ package com.freecode.redditclone.mapper;
 
 import java.util.Optional;
 
-import com.freecode.redditclone.dto.CitaDto;
+import com.freecode.redditclone.dto.RecetaDto;
 import com.freecode.redditclone.dto.CitaDispDto;
 import com.freecode.redditclone.model.Cita;
 import com.freecode.redditclone.model.Receta;
@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Mapper(componentModel="spring")
 public interface RecetaMapper {
 
+    public  RecetaDto mapToDto(Receta receta);
 /*
     
 
